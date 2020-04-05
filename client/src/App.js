@@ -1,9 +1,20 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  useHistory,
+} from "react-router-dom";
 import Container from "./components/Container/Container";
 import Header from "./components/Header/Header";
 import "./App.css";
 import OrdersList from "./components/OrdersList/OrdersList";
+import OrderItemsList from "./components/OrderItemsList/OrderItemsList";
+
+const Redirect = ({ path }) => {
+  useHistory().push(path);
+  return <></>;
+};
 
 const App = () => {
   return (
@@ -11,10 +22,11 @@ const App = () => {
       <Header />
       <Container>
         <Switch>
-          <Route path="/orders" component={OrdersList} />
-          <Route path="/test2">
-            <h1>test 2</h1>
+          <Route exact path="/">
+            <Redirect path="orders" />
           </Route>
+          <Route exact path="/orders" component={OrdersList} />
+          <Route path="/orders/:number" component={OrderItemsList} />
         </Switch>
       </Container>
     </Router>

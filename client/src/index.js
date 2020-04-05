@@ -1,11 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { createStore, StoreProvider, persist } from "easy-peasy";
 import App from "./App";
 
+import storeModel from "./store/store";
+
+const store = createStore(persist(storeModel));
+
 ReactDOM.render(
-  <React.StrictMode>
+  <StoreProvider store={store}>
     <App />
-  </React.StrictMode>,
+  </StoreProvider>,
   document.getElementById("root")
 );
 

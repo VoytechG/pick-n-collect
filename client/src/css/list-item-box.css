@@ -1,11 +1,39 @@
 .list-header {
   display: flex;
+  padding: 1em;
+  height: 3em;
+  max-height: 3em;
   justify-content: center;
-  margin: 1em;
+}
+
+.header-left {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.header-center {
+  /* position: absolute; */
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.return-button {
+  height: 100%;
+}
+
+.return-button:active {
+  font-weight: bold;
+  color: var(--trenary-color);
 }
 
 .flex {
   display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
 }
 
 .flex-space-between {

@@ -4,14 +4,20 @@ import Order from "../../logic/Orders/Order";
 import "../../css/list-item-box.css";
 import "../../css/interaction.css";
 import { OrderStatusMessagesInPolish } from "../../logic/Orders/Order";
+import { useHistory, useRouteMatch } from "react-router-dom";
 
 const OrderBox = ({ order }) => {
-  const onClick = () => {
-    console.log("Clicked!");
+  const { url } = useRouteMatch();
+  const history = useHistory();
+
+  const redirectToOrder = () => {
+    console.log(url);
+    const orderUrl = `${url}/${order.number}`;
+    history.push(orderUrl);
   };
 
   return (
-    <div className="card light-up-active noselect" onClick={onClick}>
+    <div className="card light-up-active noselect" onClick={redirectToOrder}>
       <div className="flex-space-between font-bigger">
         <div className="font-bold">{`Zakupy #${order.number}`}</div>
         <div>{order.dateOrderPlaced}</div>

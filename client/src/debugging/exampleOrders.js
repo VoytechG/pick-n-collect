@@ -15,6 +15,8 @@ const getExampleOrders = () => {
     new Order("someid4", "customerid", "bułki, masło", 4, "03/05/2020"),
   ];
 
+  const exampleOrders = {};
+
   for (const order of exampleOrdersList) {
     for (let i = 0; i < 3; i++) {
       const exampleOrderItem = new OrderItem(
@@ -25,9 +27,11 @@ const getExampleOrders = () => {
       );
       order.addOrderItem(exampleOrderItem);
     }
+
+    exampleOrders[order.number] = order;
   }
 
-  return exampleOrdersList;
+  return exampleOrders;
 };
 
 export const exampleOrders = getExampleOrders();

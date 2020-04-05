@@ -15,7 +15,6 @@ const OrderItemsList = () => {
   );
   const addItem = () => {
     const newOrderItem = new OrderItem("", order.orderId, "", "");
-    // order.addOrderItem(newOrderItem);
     addItemToOrder({ orderNumber: order.number, newOrderItem });
   };
 
@@ -41,12 +40,16 @@ const OrderItemsList = () => {
         </div>
       </div>
 
-      <div className="">
-        {order.orderItemsList.map((orderItem, i) => (
-          <Item key={i} numberOnTheList={i + 1} orderItem={orderItem} />
-        ))}
-        <ItemAddButton onClick={addItem} />
-      </div>
+      {order ? (
+        <div>
+          {order.orderItemsList.map((orderItem, i) => (
+            <Item key={i} numberOnTheList={i + 1} orderItem={orderItem} />
+          ))}
+          <ItemAddButton onClick={addItem} />
+        </div>
+      ) : (
+        <div>Zamówienie o numerze #{number} nie istnieje.</div>
+      )}
     </div>
   );
 };

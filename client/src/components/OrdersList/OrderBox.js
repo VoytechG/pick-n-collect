@@ -16,6 +16,10 @@ const OrderBox = ({ order }) => {
     history.push(orderUrl);
   };
 
+  const totalBillingAmount = order.totalBillingAmount
+    ? `${order.totalBillingAmount.toFixed(2)}  zł`
+    : "-//-";
+
   return (
     <div className="card light-up-active noselect" onClick={redirectToOrder}>
       <div className="flex-space-between font-bigger">
@@ -23,17 +27,15 @@ const OrderBox = ({ order }) => {
         <div>{order.dateOrderPlaced}</div>
       </div>
       <div>{order.notes}</div>
-      <div className="flex-space-between">
-        <div>Status: </div>
-        <div className="flex-gap"></div>
-        <div>{OrderStatusMessagesInPolish[order.status]}</div>
-      </div>
       <div className="flex">
         <div>Suma: </div>
         <div className="flex-gap"></div>
-        <div className="font-bold">
-          {order.billingTotalAmount ? order.billingTotalAmount : "-//-"}
-        </div>
+        <div className="font-bold">{totalBillingAmount}</div>
+      </div>
+      <div className="flex-center">
+        {/* <div>Status: </div> */}
+        {/* <div className="flex-gap"></div> */}
+        <div>{OrderStatusMessagesInPolish[order.status]}</div>
       </div>
     </div>
   );

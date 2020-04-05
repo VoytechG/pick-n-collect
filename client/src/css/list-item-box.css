@@ -29,6 +29,14 @@
 
 .flex {
   display: flex;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.flex-center {
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
 
 .flex-column {

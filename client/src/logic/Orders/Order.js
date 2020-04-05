@@ -1,6 +1,7 @@
 import OrderItem from "./OrderItem";
 
 export const OrderStatus = {
+  EMPTY: "EMPTY",
   DRAFT: "DRAFT",
   AWAITING_REALIIATION: "AWAITING_REALIIATION",
   BEING_REALIZED: "BEING_REALIZED",
@@ -9,11 +10,12 @@ export const OrderStatus = {
 };
 
 export const OrderStatusMessagesInPolish = {
-  DRAFT: "Wersja robocza. Nie zlecono zamówienia sklepowi.",
-  AWAITING_REALIIATION: "Oczekuje na realizacje przez pracowników EPI",
+  EMPTY: "Lista pusta. Dodaj produkty.",
+  DRAFT: "Złóż zamówienie",
+  AWAITING_REALIIATION: "Wysłano zamówienie",
   BEING_REALIZED: "Produkty są właśnie pakowane",
   READY_FOR_COLLECTION: "Gotowe do odbioru",
-  COLLECTED: "Zapłacono i odebrano",
+  COLLECTED: "Odebrano",
 };
 
 class Order {
@@ -25,7 +27,7 @@ class Order {
     this.dateOrderPlaced = dateOrderPlaced;
     this.status = OrderStatus.DRAFT;
     this.orderItemsList = [];
-    this.billingTotalAmount = null;
+    this.totalBillingAmount = null;
   }
 
   addOrderItem(orderItem) {
@@ -41,7 +43,7 @@ class Order {
       notes: this.notes,
       number: this.number,
       status: this.status,
-      billingTotalAmont: this.billingTotalAmount,
+      billingTotalAmont: this.totalBillingAmount,
       numberOfItems: this.orderItemsList.length,
     };
 

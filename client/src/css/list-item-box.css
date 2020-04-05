@@ -1,8 +1,8 @@
-/* .grid {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-} */
+.list-header {
+  display: flex;
+  justify-content: center;
+  margin: 1em;
+}
 
 .flex {
   display: flex;
@@ -48,12 +48,12 @@
   box-shadow: rgba(3, 8, 20, 0.1) 0px 0.15rem 0.5rem,
     rgba(2, 8, 20, 0.1) 0px 0.075rem 0.175rem;
   border-radius: 4px;
-  /* transition: all 250ms; */
+  transition: all 200ms;
 
   word-wrap: break-word;
   --entrance-duration: 200ms;
 
-  animation: cardEntrance var(--entrance-duration) ease-out;
+  animation: cardEntrance 200ms ease-out;
   animation-fill-mode: backwards;
   animation-play-state: inherit;
 }
@@ -64,6 +64,10 @@
 
 .card > div:last-child {
   margin-bottom: 0px;
+}
+
+.light-up-active:active {
+  background-color: var(--secondary-color);
 }
 
 .item-title {

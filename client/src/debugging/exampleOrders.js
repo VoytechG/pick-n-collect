@@ -12,6 +12,7 @@ const getExampleOrders = () => {
       "26/04/2020"
     ),
     new Order("someid3", "customerid", "mineralna i ser", 3, "01/05/2020"),
+    new Order("someid4", "customerid", "bułki, masło", 4, "03/05/2020"),
   ];
 
   for (const order of exampleOrdersList) {

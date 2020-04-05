@@ -11,9 +11,12 @@ const Header = () => {
 
   return (
     <div className="header-container">
-      <div className="flex-box-vert-align">
+      <div className="flex-box-vert-align pos-absolute flex-center">
         <img src={logo} alt="EPI logo" width="60px" />
-        {/* <img src={logo} alt="EPI logo" width="60px" /> */}
+      </div>
+      <div className="flex-box-vert-align pos-absolute flex-space-between">
+        {/* <div className="button noselect">MENU</div> */}
+        {/* <div className="button">ZALOGUJ</div> */}
       </div>
     </div>
   );

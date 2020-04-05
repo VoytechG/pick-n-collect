@@ -4,14 +4,7 @@ import "./header.css";
 import "../../css/sizing.css";
 import "../../css/colors.css";
 import LinkButton from "./LinkButton";
-
-const Logo = () => (
-  <div className="header-logo">
-    NHS Wellbeing
-    <br />
-    Predictor
-  </div>
-);
+import logo from "../../assets/epi_logo_transparent2.png";
 
 const Header = () => {
   const { pathname: currentUrl } = useLocation();
@@ -19,7 +12,8 @@ const Header = () => {
   return (
     <div className="header-container">
       <div className="flex-box-vert-align">
-        <Logo style={{ flex: 1 }} />
+        <img src={logo} alt="EPI logo" width="60px" />
+
         <div
           className="flex-box-vert-align overflow-y"
           style={{ flex: 4, justifyContent: "space-between" }}

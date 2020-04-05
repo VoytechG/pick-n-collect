@@ -1,4 +1,5 @@
 export const OrderStatus = {
+  DRAFT: "draft",
   AWAITING_REALIIATION: "Awaiting realization",
   BEING_REALIZED: "Being realized",
   READY_FOR_COLLECTION: "Ready for collection",
@@ -9,7 +10,8 @@ class Order {
     this.orderId = orderId;
     this.customerId = customerId;
     this.dateOrderPlaced = dateOrderPlaced;
-    this.status = this.orderProductList = [];
+    this.status = OrderStatus.DRAFT;
+    this.orderProductList = [];
     this.billingTotalAmount = null;
   }
 

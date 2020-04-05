@@ -3,15 +3,18 @@ import "./order-box.css";
 import { PropTypes } from "prop-types";
 import OrderItem from "./../../logic/Orders/OrderItem";
 
-export const OrderListItem = ({ orderItem }) => {
+const OrderListItem = ({ orderItem, numberOnTheList }) => {
   return (
     <div className="card">
-      <div className="item-title">{orderItem.productName}</div>
+      <div className="item-title">{`#${numberOnTheList} ${orderItem.productName}`}</div>
       <div>{orderItem.productDescription}</div>
     </div>
   );
 };
 
 OrderListItem.propTypes = {
-  OrderItem: PropTypes.instanceOf(OrderItem),
+  orderItem: PropTypes.instanceOf(OrderItem),
+  numberOnTheList: PropTypes.number,
 };
+
+export default OrderListItem;

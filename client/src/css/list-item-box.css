@@ -6,7 +6,22 @@
 
 .flex {
   display: flex;
-  flex-direction: column;
+}
+
+.flex-space-between {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.flex-end {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.flex-gap {
+  flex: 1 0 1em;
 }
 
 @keyframes cardEntrance {
@@ -43,10 +58,26 @@
   animation-play-state: inherit;
 }
 
+.card > div {
+  margin-bottom: 1em;
+}
+
+.card > div:last-child {
+  margin-bottom: 0px;
+}
+
 .item-title {
   font-weight: bold;
   font-size: 1.2em;
   margin-bottom: 1em;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.font-bigger {
+  font-size: 1.2em;
 }
 
 .card-add-button {

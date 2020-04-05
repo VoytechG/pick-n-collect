@@ -5,6 +5,15 @@ class OrderItem {
     this.productName = productName;
     this.productDescription = productDescription;
   }
+
+  getContents() {
+    const contents = {
+      productName: this.productName,
+      productDescription: this.productDescription,
+    };
+
+    return contents;
+  }
 }
 
 export default OrderItem;

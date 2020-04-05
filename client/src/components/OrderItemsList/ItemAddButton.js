@@ -1,8 +1,8 @@
 import React from "react";
-import "./order-box.css";
+import "../../css/list-item-box.css";
 import { PropTypes } from "prop-types";
 
-const OrderListItemAddButton = ({ onClick }) => {
+const ItemAddButton = ({ onClick }) => {
   return (
     <div className="card card-add-button" onClick={onClick}>
       <div className="plus alt"></div>
@@ -10,8 +10,8 @@ const OrderListItemAddButton = ({ onClick }) => {
   );
 };
 
-OrderListItemAddButton.propTypes = {
+ItemAddButton.propTypes = {
   onClick: PropTypes.func,
 };
 
-export default OrderListItemAddButton;
+export default ItemAddButton;

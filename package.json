@@ -9,7 +9,8 @@
     "server": "nodemon server",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "production-windows": "@powershell .\\run-production.ps1"
+    "production": "./scripts/run-production.sh",
+    "production-windows": "@powershell .\\scripts\\run-production.ps1"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,9 @@
   },
   "author": "Wojciech Golaszewski",
   "license": "ISC",
+  "engines": {
+    "node": "12.x"
+  },
   "bugs": {
     "url": "https://github.com/VoytechG/pick-n-collect/issues"
   },

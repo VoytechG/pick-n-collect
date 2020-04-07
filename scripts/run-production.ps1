@@ -1,3 +1,3 @@
-# run server in production mode
+npm run build --prefix client
 $env:NODE_ENV="production"
 npm start

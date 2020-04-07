@@ -21,7 +21,8 @@ export const userData = {
     userData.orders = { ...userData.orders, ...ordersToAdd };
   }),
   addItemToOrder: action((userData, { orderNumber, newOrderItem }) => {
-    console.log(newOrderItem);
-    userData.orders[orderNumber].orderItemsList.push(newOrderItem);
+    if (orderNumber) {
+      userData.orders[orderNumber].orderItemsList.push(newOrderItem);
+    }
   }),
 };

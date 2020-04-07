@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../css/list-item-box.css";
 import Item from "./ItemBox";
 import ItemAddButton from "./ItemAddButton";
@@ -14,15 +14,27 @@ const OrderItemsList = () => {
     (actions) => actions.userData.addItemToOrder
   );
   const addItem = () => {
-    const newOrderItem = new OrderItem("", order.orderId, "", "");
+    // const newOrderItem = new OrderItem("", order.orderId, "", "");
+    const newOrderItem = {
+      orderItemId: "",
+      orderId: order.orderId,
+      productName: "",
+      productDescription: "",
+    };
     addItemToOrder({ orderNumber: order.number, newOrderItem });
   };
+
+  useEffect(() => {
+    addItemToOrder({});
+  }, []);
 
   const history = useHistory();
 
   const returnToOrdersList = () => {
     history.push("");
   };
+
+  console.log("order", order);
 
   return (
     <div>

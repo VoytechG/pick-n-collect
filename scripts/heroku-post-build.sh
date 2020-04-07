@@ -1,3 +1,5 @@
+cd client
 NPM_CONFIG_PRODUCTION=false 
-yarn install --prefix client 
-yarn build --prefix client
+yarn install
+yarn build 
+cd ..

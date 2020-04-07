@@ -1,2 +1,2 @@
 export NODE_ENV=production
-yarn start
+npm start

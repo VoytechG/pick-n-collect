@@ -1,7 +1,7 @@
 export const ADD_ORDER = "ADD_ORDER";
 export const ADD_ITEM_TO_ORDER = "ADD_ITEM_TO_ORDER";
 
-function validateType(obj, types) {
+export function validateType(obj, types) {
   if (Object.keys(obj).length !== Object.keys(types).length) {
     throw new TypeError("wrong type");
   }
@@ -11,32 +11,4 @@ function validateType(obj, types) {
       throw new TypeError(`key ${key} value ${value}`);
     }
   }
-}
-
-export function addItemToOrder(item) {
-  const { id, props } = item;
-  validateType({ id }, { id: "string" });
-  validateType(props, {
-    orderId: "string",
-    productName: "string",
-    productDescription: "string",
-  });
-
-  return { type: ADD_ITEM_TO_ORDER, item };
-}
-
-export function addOrder(order) {
-  const { id, props } = order;
-  validateType({ id }, { id: "string" });
-  validateType(props, {
-    customerId: "string",
-    notes: "string",
-    number: "number",
-    dateOrderPlaced: "string",
-    status: "string",
-    items: "object",
-    totalBillingAmount: "number",
-  });
-
-  return { type: ADD_ORDER, order };
 }

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import { exampleOrders } from "./../../debugging/exampleOrders";
+import { exampleOrders } from "../../debugging/exampleOrders_classes";
 import OrderBox from "./OrderBox";
 import "../../css/list-item-box.css";
 import { useStoreState, useStoreActions } from "easy-peasy";

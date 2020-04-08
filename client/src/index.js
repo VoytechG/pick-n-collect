@@ -1,11 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createStore, StoreProvider, persist } from "easy-peasy";
+// import { createStore, StoreProvider, persist } from "easy-peasy";
 import App from "./App";
+import { Provider as StoreProvider } from "react-redux";
+import store from "./store/store";
 
-import storeModel from "./store/store";
-
-const store = createStore(persist(storeModel));
+// const store = createStore(persist(store));
 
 ReactDOM.render(
   <StoreProvider store={store}>

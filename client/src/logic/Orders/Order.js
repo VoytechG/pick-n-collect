@@ -26,7 +26,7 @@ class Order {
     this.number = number;
     this.dateOrderPlaced = dateOrderPlaced;
     this.status = OrderStatus.DRAFT;
-    this.orderItemsList = [];
+    this.items = [];
     this.totalBillingAmount = null;
   }
 
@@ -34,24 +34,25 @@ class Order {
     if (!(orderItem instanceof OrderItem)) {
       throw new TypeError("orderItem must be an instance of OrderItem");
     }
-    this.orderItemsList.push(orderItem);
+    this.items.push(orderItem);
   }
 
   getContentOfOrder() {
     const orderContents = {
-      dateOrderPlaced: this.dateOrderPlaced,
+      customerId: this.customerId,
       notes: this.notes,
       number: this.number,
+      dateOrderPlaced: this.dateOrderPlaced,
       status: this.status,
-      billingTotalAmont: this.totalBillingAmount,
-      numberOfItems: this.orderItemsList.length,
+      totalBillingAmount: this.totalBillingAmount,
+      items: this.items,
     };
 
     return orderContents;
   }
 
   getContentOfOrderItemsList() {
-    return this.orderItemsList.map((orderItem) => orderItem.getContents());
+    return this.items.map((orderItem) => orderItem.getContents());
   }
 }
 

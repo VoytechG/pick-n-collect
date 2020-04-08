@@ -22,7 +22,7 @@ export const userData = {
   }),
   addItemToOrder: action((userData, { orderNumber, newOrderItem }) => {
     if (orderNumber) {
-      userData.orders[orderNumber].orderItemsList.push(newOrderItem);
+      userData.orders[orderNumber].items.push(newOrderItem);
     }
   }),
 };

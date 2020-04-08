@@ -4,8 +4,28 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import { Provider as StoreProvider } from "react-redux";
 import store from "./store/store";
+import { exampleOrderAndItems } from "./debugging/exampleOrders";
+import { addOrder, addItemToOrder } from "./store/actions/index";
 
-// const store = createStore(persist(store));
+const { orders, items } = exampleOrderAndItems;
+
+for (const o of orders) {
+  store.dispatch(
+    addOrder({
+      id: o.orderId,
+      props: o.getContentOfOrder(),
+    })
+  );
+}
+
+for (const i of items) {
+  store.dispatch(
+    addItemToOrder({
+      id: i.orderItemId,
+      props: i.getContents(),
+    })
+  );
+}
 
 ReactDOM.render(
   <StoreProvider store={store}>

@@ -54,7 +54,7 @@ const OrderItemsList = () => {
 
       {order ? (
         <div>
-          {order.orderItemsList.map((orderItem, i) => (
+          {order.items.map((orderItem, i) => (
             <Item key={i} numberOnTheList={i + 1} orderItem={orderItem} />
           ))}
           <ItemAddButton onClick={addItem} />

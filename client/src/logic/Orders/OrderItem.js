@@ -8,6 +8,7 @@ class OrderItem {
 
   getContents() {
     const contents = {
+      orderId: this.orderId,
       productName: this.productName,
       productDescription: this.productDescription,
     };

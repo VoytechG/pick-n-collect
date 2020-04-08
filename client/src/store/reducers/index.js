@@ -34,7 +34,7 @@ function orders(state = {}, action) {
         [id]: props,
       };
     case ADD_ITEM_TO_ORDER:
-      const orderId = action.itemProps.orderId;
+      const orderId = action.item.props.orderId;
 
       return {
         ...state,
@@ -60,8 +60,6 @@ function orderItems(state = [], action) {
  *  root
  */
 
-function app(state = {}, action) {
-  combineReducers({ orders, orderItems });
-}
+const app = combineReducers({ orders, orderItems });
 
 export default app;

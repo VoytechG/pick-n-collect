@@ -8,7 +8,7 @@ function validateType(obj, types) {
 
   for (const [key, value] of Object.entries(obj)) {
     if (!types[key] || (value != null && types[key] !== typeof value)) {
-      throw new TypeError("wrong type");
+      throw new TypeError(`key ${key} value ${value}`);
     }
   }
 }
@@ -34,7 +34,7 @@ export function addOrder(order) {
     number: "number",
     dateOrderPlaced: "string",
     status: "string",
-    orderItemsList: "object",
+    items: "object",
     totalBillingAmount: "number",
   });
 

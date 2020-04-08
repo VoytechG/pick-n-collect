@@ -2,9 +2,10 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import OrderBox from "./OrderBox";
 import "../../css/list-item-box.css";
-import { useStoreState, useStoreActions } from "easy-peasy";
+import { connect } from "react-redux";
+import { addOrder } from "../../store/actions/index";
 
-const OrdersList = ({ orders, addOrders }) => {
+const OrdersList = ({ orders, addOrder }) => {
   return (
     <div>
       <div className="list-header">Moje EPI Zakupy</div>
@@ -21,4 +22,18 @@ const OrdersList = ({ orders, addOrders }) => {
 
 OrdersList.propTypes = {};
 
-export default OrdersList;
+const mapStateToProps = (state) => {
+  return {
+    orders: state.orders,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addOrder: (order) => {
+      dispatch(addOrder(order));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrdersList);

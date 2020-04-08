@@ -1,40 +1,54 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "../../css/list-item-box.css";
 import Item from "./ItemBox";
 import ItemAddButton from "./ItemAddButton";
-import { useStoreState, useStoreActions } from "easy-peasy";
 import { useParams, useHistory } from "react-router-dom";
 import OrderItem from "./../../logic/Orders/OrderItem";
+import { addItemToOrder } from "./../../store/actions";
+import { connect } from "react-redux";
+import { v4 as id4 } from "uuid";
 
-const OrderItemsList = () => {
+const OrderItemsList = ({ items, addItemToOrder, orders }) => {
   const { number } = useParams();
 
-  const order = useStoreState((state) => state.userData.orders[number]);
-  const addItemToOrder = useStoreActions(
-    (actions) => actions.userData.addItemToOrder
-  );
-  const addItem = () => {
-    // const newOrderItem = new OrderItem("", order.orderId, "", "");
-    const newOrderItem = {
-      orderItemId: "",
-      orderId: order.orderId,
-      productName: "",
-      productDescription: "",
-    };
-    addItemToOrder({ orderNumber: order.number, newOrderItem });
+  let order = Object.entries(orders)
+    .filter(([key, ord]) => ord.number === Number(number))
+    .map(([key, ord]) => {
+      return {
+        id: key,
+        ...ord,
+      };
+    })[0];
+
+  console.log(order);
+  // cons;
+
+  const orderItems = () => {
+    if (order) {
+      return order.items.map((itemId) => items[itemId]);
+    }
   };
 
-  useEffect(() => {
-    addItemToOrder({});
-  }, []);
+  // console.log(orderItems);
+
+  const newOrderItem = () => {
+    if (order) {
+      return {
+        id: id4(),
+        props: {
+          orderId: order.id,
+          productName: "",
+          productDescription: "",
+        },
+      };
+    }
+  };
 
   const history = useHistory();
 
   const returnToOrdersList = () => {
     history.push("");
   };
-
-  console.log("order", order);
 
   return (
     <div>
@@ -54,10 +68,10 @@ const OrderItemsList = () => {
 
       {order ? (
         <div>
-          {order.items.map((orderItem, i) => (
+          {orderItems().map((orderItem, i) => (
             <Item key={i} numberOnTheList={i + 1} orderItem={orderItem} />
           ))}
-          <ItemAddButton onClick={addItem} />
+          <ItemAddButton onClick={() => addItemToOrder(newOrderItem())} />
         </div>
       ) : (
         <div>Zamówienie o numerze #{number} nie istnieje.</div>
@@ -66,4 +80,19 @@ const OrderItemsList = () => {
   );
 };
 
-export default OrderItemsList;
+const mapStateToProps = (state) => {
+  return {
+    items: state.orderItems,
+    orders: state.orders,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addItemToOrder: (item) => {
+      dispatch(addItemToOrder(item));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(OrderItemsList);

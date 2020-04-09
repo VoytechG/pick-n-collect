@@ -5,3 +5,7 @@
 .content-box {
   padding-top: 0;
 }
+
+.emptySpace {
+  width: 0.5em;
+}

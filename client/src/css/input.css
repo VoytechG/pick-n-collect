@@ -1,0 +1,31 @@
+input[type="text"],
+textarea {
+  transition: 100ms;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  border: none;
+  padding: 0;
+  outline: none;
+  width: 100%;
+}
+
+textarea {
+  resize: none;
+  transform: 0ms;
+  height: 2.6em;
+}
+
+input[type="text"]:hover,
+textarea:hover {
+  box-shadow: inset 0px -2px var(--secondary-color);
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  box-shadow: inset 0px -2px var(--primary-color);
+}
+
+/* input[type="text"]:placeholder-shown {
+  box-shadow: inset 0px -2px var(--secondary-color);
+} */

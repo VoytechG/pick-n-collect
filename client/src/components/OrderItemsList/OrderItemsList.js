@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "../../css/list-item-box.css";
 import Item from "./ItemBox";
 import ItemAddButton from "./ItemAddButton";
@@ -11,25 +11,30 @@ import OrderInfo from "./OrderInfo";
 const OrderItemsList = ({ items, addItemToOrder, orders }) => {
   const { number } = useParams();
 
+  const [newlyAddedItemId, setNewItemId] = useState(null);
+
   const order = orders.filter((ord) => ord.number === Number(number))[0];
 
   const orderItems = order ? order.items : null;
 
-  const newOrderItem = order
-    ? {
+  const history = useHistory();
+  const returnToOrdersList = () => {
+    history.push("");
+  };
+
+  const handleAddingNewItem = () => {
+    if (order) {
+      const newOrderItem = {
         id: idGen(),
         props: {
           orderId: order.id,
           productName: "",
           productDescription: "",
         },
-      }
-    : null;
-
-  const history = useHistory();
-
-  const returnToOrdersList = () => {
-    history.push("");
+      };
+      addItemToOrder(newOrderItem);
+      setNewItemId(newOrderItem.id);
+    }
   };
 
   return (
@@ -47,9 +52,15 @@ const OrderItemsList = ({ items, addItemToOrder, orders }) => {
           </div>
 
           {orderItems.map((itemId, i) => (
-            <Item key={itemId} itemId={itemId} numberOnTheList={i + 1} />
+            <Item
+              key={itemId}
+              itemId={itemId}
+              numberOnTheList={i + 1}
+              newlyAdded={newlyAddedItemId === itemId}
+              removeNewlyAddedTag={() => setNewItemId(null)}
+            />
           ))}
-          <ItemAddButton onClick={() => addItemToOrder(newOrderItem)} />
+          <ItemAddButton onClick={handleAddingNewItem} />
         </>
       ) : (
         <div className="header-center">

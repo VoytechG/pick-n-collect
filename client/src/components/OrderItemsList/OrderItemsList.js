@@ -41,7 +41,7 @@ const OrderItemsList = ({ items, addItemToOrder, orders }) => {
     <>
       <div className="list-header ">
         <div className="return-button" onClick={returnToOrdersList}>
-          <div>◀</div>
+          <div className="return-button-fill"></div>
         </div>
       </div>
       {order ? (

@@ -13,7 +13,7 @@ const OrderItemsList = ({ items, addItemToOrder, orders }) => {
 
   const order = orders.filter((ord) => ord.number === Number(number))[0];
 
-  const orderItems = order ? order.items.map((itemId) => items[itemId]) : null;
+  const orderItems = order ? order.items : null;
 
   const newOrderItem = order
     ? {

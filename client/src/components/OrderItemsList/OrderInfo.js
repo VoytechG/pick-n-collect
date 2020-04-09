@@ -24,8 +24,6 @@ const OrderInfo = ({ order }) => {
         <div className="font-bold">{totalBillingAmount}</div>
       </div>
       <div className="flex-center">
-        {/* <div>Status: </div> */}
-        {/* <div className="flex-gap"></div> */}
         <div>{OrderStatusMessagesInPolish[order.status]}</div>
       </div>
     </div>
@@ -33,7 +31,7 @@ const OrderInfo = ({ order }) => {
 };
 
 OrderInfo.propTypes = {
-  order: PropTypes.instanceOf(Order),
+  order: PropTypes.object.isRequired,
 };
 
 export default OrderInfo;

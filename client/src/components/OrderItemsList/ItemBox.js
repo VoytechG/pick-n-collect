@@ -23,7 +23,6 @@ ItemBox.propTypes = {
 
 const mapStateToProps = (state, ownProps) => {
   const { itemId } = ownProps;
-
   return {
     item: { ...state.orderItems[itemId] },
   };
@@ -31,8 +30,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    modifyItem: (order) => {
-      dispatch(modifyOrderItem(order));
+    modifyItem: (item) => {
+      dispatch(modifyOrderItem(item));
     },
   };
 };

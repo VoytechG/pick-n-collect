@@ -11,12 +11,17 @@ import "./css/App.css";
 import OrdersList from "./components/OrdersList/OrdersList";
 import OrderItemsList from "./components/OrderItemsList/OrderItemsList";
 
+import populateStoreIfEmpty from "./debugging/mockData/populateStoreWithMockData";
+import isDev from "./debugging/devModeChecker";
+
 const Redirect = ({ path }) => {
   useHistory().push(path);
   return <></>;
 };
 
 const App = () => {
+  if (isDev()) populateStoreIfEmpty();
+
   return (
     <Router>
       <Header />

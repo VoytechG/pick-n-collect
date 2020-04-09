@@ -1,7 +1,7 @@
-import Order from "../logic/Orders/Order";
-import OrderItem from "../logic/Orders/OrderItem";
-import { OrderStatus } from "../logic/Orders/Order";
-import idGen from "../utils/idGenerator";
+import Order from "../../logic/Orders/Order";
+import OrderItem from "../../logic/Orders/OrderItem";
+import { OrderStatus } from "../../logic/Orders/Order";
+import idGen from "../../utils/idGenerator";
 
 const exampleCustomer = idGen();
 

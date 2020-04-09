@@ -3,34 +3,16 @@ import ReactDOM from "react-dom";
 // import { createStore, StoreProvider, persist } from "easy-peasy";
 import App from "./App";
 import { Provider as StoreProvider } from "react-redux";
-import store from "./store/store";
-import { exampleOrderAndItems } from "./debugging/exampleOrders";
-import { addOrder } from "./store/actions/orders";
-import { addItemToOrder } from "./store/actions/orderItems";
+import storeAndPersistor from "./store/store";
 
-const { orders, items } = exampleOrderAndItems;
-
-for (const o of orders) {
-  store.dispatch(
-    addOrder({
-      id: o.orderId,
-      props: o.getContentOfOrder(),
-    })
-  );
-}
-
-for (const i of items) {
-  store.dispatch(
-    addItemToOrder({
-      id: i.orderItemId,
-      props: i.getContents(),
-    })
-  );
-}
+import { PersistGate } from "redux-persist/integration/react";
+const { store, persistor } = storeAndPersistor;
 
 ReactDOM.render(
   <StoreProvider store={store}>
-    <App />
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
   </StoreProvider>,
   document.getElementById("root")
 );

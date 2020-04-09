@@ -1,8 +1,6 @@
-import { addOrder } from "./orders";
-import { addItemToOrder } from "./orderItems";
-
 export const ADD_ORDER = "ADD_ORDER";
 export const ADD_ITEM_TO_ORDER = "ADD_ITEM_TO_ORDER";
+export const MODIFY_ORDER_ITEM = "MODIFY_ORDER_ITEM";
 
 export function validateType(obj, types) {
   if (Object.keys(obj).length !== Object.keys(types).length) {
@@ -15,8 +13,3 @@ export function validateType(obj, types) {
     }
   }
 }
-
-export default {
-  addOrder,
-  addItemToOrder,
-};

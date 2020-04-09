@@ -13,7 +13,7 @@ const OrderItemsList = ({ items, addItemToOrder, orders }) => {
 
   const order = orders.filter((ord) => ord.number === Number(number))[0];
 
-  const orderItems = order.items.map((itemId) => items[itemId]) || null;
+  const orderItems = order ? order.items.map((itemId) => items[itemId]) : null;
 
   const newOrderItem = order
     ? {
@@ -39,20 +39,22 @@ const OrderItemsList = ({ items, addItemToOrder, orders }) => {
           <div className="">◀</div>
         </div>
       </div>
-      <OrderInfo order={order} />
-      <div className="header-center margin-vertical">
-        <div>Produkty na mojej liście</div>
-      </div>
-
       {order ? (
-        <div>
-          {orderItems.map((orderItem, i) => (
-            <Item key={i} numberOnTheList={i + 1} orderItem={orderItem} />
+        <>
+          <OrderInfo order={order} />
+          <div className="header-center margin-vertical">
+            <div>Produkty na mojej liście</div>
+          </div>
+
+          {orderItems.map((itemId, i) => (
+            <Item key={itemId} itemId={itemId} numberOnTheList={i + 1} />
           ))}
           <ItemAddButton onClick={() => addItemToOrder(newOrderItem)} />
-        </div>
+        </>
       ) : (
-        <div>Zamówienie o numerze #{number} nie istnieje.</div>
+        <div className="header-center">
+          Zamówienie o numerze #{number} nie istnieje.
+        </div>
       )}
     </>
   );
@@ -61,10 +63,10 @@ const OrderItemsList = ({ items, addItemToOrder, orders }) => {
 const mapStateToProps = (state) => {
   return {
     items: state.orderItems,
-    orders: Object.entries(state.orders).map(([key, ord]) => {
+    orders: Object.entries(state.orders).map(([key, props]) => {
       return {
         id: key,
-        ...ord,
+        ...props,
       };
     }),
   };

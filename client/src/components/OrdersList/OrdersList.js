@@ -10,21 +10,29 @@ const OrdersList = ({ orders, addOrder }) => {
     <div>
       <div className="list-header flex-center">Moje EPI Zakupy</div>
       <div>
-        {Object.values(orders)
+        {orders
           .sort((order_a, order_b) => order_b.number - order_a.number)
           .map((order) => (
-            <OrderBox key={order.number} order={order} />
+            <OrderBox key={order.id} order={order} />
           ))}
       </div>
     </div>
   );
 };
 
-OrdersList.propTypes = {};
+OrdersList.propTypes = {
+  orders: PropTypes.array.isRequired,
+  addOrder: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => {
   return {
-    orders: state.orders,
+    orders: Object.entries(state.orders).map(([id, props]) => {
+      return {
+        id,
+        ...props,
+      };
+    }),
   };
 };
 

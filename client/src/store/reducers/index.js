@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
 
-import { ADD_ITEM_TO_ORDER, ADD_ORDER } from "../actions";
+import { ADD_ITEM_TO_ORDER, ADD_ORDER, MODIFY_ORDER_ITEM } from "../actions";
 
 /**
  * Depth level 2
@@ -49,6 +49,7 @@ function orders(state = {}, action) {
 function orderItems(state = [], action) {
   switch (action.type) {
     case ADD_ITEM_TO_ORDER:
+    case MODIFY_ORDER_ITEM:
       const { id, props } = action.item;
       return { ...state, [id]: props };
     default:

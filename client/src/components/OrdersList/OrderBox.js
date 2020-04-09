@@ -43,7 +43,7 @@ const OrderBox = ({ order }) => {
 };
 
 OrderBox.propTypes = {
-  order: PropTypes.instanceOf(Order),
+  order: PropTypes.object.isRequired,
 };
 
 export default OrderBox;

@@ -12,7 +12,7 @@ import OrdersList from "./components/OrdersList/OrdersList";
 import OrderItemsList from "./components/OrderItemsList/OrderItemsList";
 
 import populateStoreIfEmpty from "./debugging/mockData/populateStoreWithMockData";
-import isDev from "./debugging/devModeChecker";
+import config from "./config";
 
 const Redirect = ({ path }) => {
   useHistory().push(path);
@@ -20,7 +20,7 @@ const Redirect = ({ path }) => {
 };
 
 const App = () => {
-  if (isDev()) populateStoreIfEmpty();
+  if (config.demoMode) populateStoreIfEmpty();
 
   return (
     <Router>

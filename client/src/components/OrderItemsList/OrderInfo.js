@@ -6,25 +6,13 @@ import "../../css/interaction.css";
 import { OrderStatusMessagesInPolish } from "../../logic/Orders/Order";
 import { useHistory, useRouteMatch } from "react-router-dom";
 
-const OrderBox = ({ order }) => {
-  const { url } = useRouteMatch();
-  const history = useHistory();
-
-  const redirectToOrder = () => {
-    console.log(url);
-    const orderUrl = `${url}/${order.number}`;
-    history.push(orderUrl);
-  };
-
+const OrderInfo = ({ order }) => {
   const totalBillingAmount = order.totalBillingAmount
     ? `${order.totalBillingAmount.toFixed(2)}  zł`
     : "-//-";
 
   return (
-    <div
-      className="card light-up-active hover-color noselect"
-      onClick={redirectToOrder}
-    >
+    <div className="card no-margin-vertical">
       <div className="flex-space-between font-bigger">
         <div className="font-bold">{`Zakupy #${order.number}`}</div>
         <div>{order.dateOrderPlaced}</div>
@@ -36,14 +24,16 @@ const OrderBox = ({ order }) => {
         <div className="font-bold">{totalBillingAmount}</div>
       </div>
       <div className="flex-center">
+        {/* <div>Status: </div> */}
+        {/* <div className="flex-gap"></div> */}
         <div>{OrderStatusMessagesInPolish[order.status]}</div>
       </div>
     </div>
   );
 };
 
-OrderBox.propTypes = {
+OrderInfo.propTypes = {
   order: PropTypes.instanceOf(Order),
 };
 
-export default OrderBox;
+export default OrderInfo;

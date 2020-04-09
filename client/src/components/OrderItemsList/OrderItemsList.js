@@ -3,46 +3,28 @@ import "../../css/list-item-box.css";
 import Item from "./ItemBox";
 import ItemAddButton from "./ItemAddButton";
 import { useParams, useHistory } from "react-router-dom";
-import OrderItem from "./../../logic/Orders/OrderItem";
-import { addItemToOrder } from "./../../store/actions";
+import { addItemToOrder } from "../../store/actions/orderItems";
 import { connect } from "react-redux";
-import { v4 as id4 } from "uuid";
+import idGen from "../../utils/idGenerator";
+import OrderInfo from "./OrderInfo";
 
 const OrderItemsList = ({ items, addItemToOrder, orders }) => {
   const { number } = useParams();
 
-  let order = Object.entries(orders)
-    .filter(([key, ord]) => ord.number === Number(number))
-    .map(([key, ord]) => {
-      return {
-        id: key,
-        ...ord,
-      };
-    })[0];
+  const order = orders.filter((ord) => ord.number === Number(number))[0];
 
-  console.log(order);
-  // cons;
+  const orderItems = order.items.map((itemId) => items[itemId]) || null;
 
-  const orderItems = () => {
-    if (order) {
-      return order.items.map((itemId) => items[itemId]);
-    }
-  };
-
-  // console.log(orderItems);
-
-  const newOrderItem = () => {
-    if (order) {
-      return {
-        id: id4(),
+  const newOrderItem = order
+    ? {
+        id: idGen(),
         props: {
           orderId: order.id,
           productName: "",
           productDescription: "",
         },
-      };
-    }
-  };
+      }
+    : null;
 
   const history = useHistory();
 
@@ -51,39 +33,40 @@ const OrderItemsList = ({ items, addItemToOrder, orders }) => {
   };
 
   return (
-    <div>
-      <div>
-        <div className="list-header">
-          <div
-            className="header-left return-button"
-            onClick={returnToOrdersList}
-          >
-            {"◀"}
-          </div>
-          <div className="header-center">
-            <div>Produkty na mojej liście</div>
-          </div>
+    <>
+      <div className="list-header ">
+        <div className="return-button" onClick={returnToOrdersList}>
+          <div className="">◀</div>
         </div>
+      </div>
+      <OrderInfo order={order} />
+      <div className="header-center margin-vertical">
+        <div>Produkty na mojej liście</div>
       </div>
 
       {order ? (
         <div>
-          {orderItems().map((orderItem, i) => (
+          {orderItems.map((orderItem, i) => (
             <Item key={i} numberOnTheList={i + 1} orderItem={orderItem} />
           ))}
-          <ItemAddButton onClick={() => addItemToOrder(newOrderItem())} />
+          <ItemAddButton onClick={() => addItemToOrder(newOrderItem)} />
         </div>
       ) : (
         <div>Zamówienie o numerze #{number} nie istnieje.</div>
       )}
-    </div>
+    </>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
     items: state.orderItems,
-    orders: state.orders,
+    orders: Object.entries(state.orders).map(([key, ord]) => {
+      return {
+        id: key,
+        ...ord,
+      };
+    }),
   };
 };
 

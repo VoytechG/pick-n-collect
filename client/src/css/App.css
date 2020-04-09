@@ -16,8 +16,11 @@ html {
   --primary-color: #14793a;
   --secondary-color: #eaf8df;
   --trenary-color: rgb(21, 187, 21);
+  --fourth-color: rgb(255, 242, 159);
   --text-color: black;
   --background-color: white;
+
+  --header-height: 80px;
 }
 
 body {

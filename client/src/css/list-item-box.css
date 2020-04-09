@@ -1,9 +1,18 @@
 .list-header {
-  display: flex;
-  padding: 1em;
+  position: sticky;
+  top: calc(80px);
+  /* padding: 0em 2em; */
   height: 3em;
-  max-height: 3em;
+  width: 100%;
+  /* display: flex;
+  align-items: center; */
+  background-color: white;
+}
+
+.flex-center {
+  display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .header-left {
@@ -12,14 +21,18 @@
 }
 
 .header-center {
-  /* position: absolute; */
   display: flex;
-  width: 100%;
   justify-content: center;
+  align-items: center;
+  margin: 1.5em;
 }
 
 .return-button {
   height: 100%;
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .return-button:active {
@@ -79,6 +92,7 @@
   justify-content: center;
   align-items: flex-start;
   padding: 1rem;
+  margin: 20px;
   margin-bottom: 1rem;
 
   box-shadow: rgba(3, 8, 20, 0.1) 0px 0.15rem 0.5rem,
@@ -94,12 +108,25 @@
   animation-play-state: inherit;
 }
 
+.no-margin-bottom {
+  margin-bottom: 0;
+}
+
+.no-margin-vertical {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 .card > div {
   margin-bottom: 1em;
 }
 
 .card > div:last-child {
   margin-bottom: 0px;
+}
+
+.hover-color:hover {
+  background-color: var(--fourth-color);
 }
 
 .light-up-active:active {

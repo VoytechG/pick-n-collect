@@ -1,3 +1,6 @@
+import { addOrder } from "./orders";
+import { addItemToOrder } from "./orderItems";
+
 export const ADD_ORDER = "ADD_ORDER";
 export const ADD_ITEM_TO_ORDER = "ADD_ITEM_TO_ORDER";
 
@@ -12,3 +15,8 @@ export function validateType(obj, types) {
     }
   }
 }
+
+export default {
+  addOrder,
+  addItemToOrder,
+};

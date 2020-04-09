@@ -5,7 +5,8 @@ import App from "./App";
 import { Provider as StoreProvider } from "react-redux";
 import store from "./store/store";
 import { exampleOrderAndItems } from "./debugging/exampleOrders";
-import { addOrder, addItemToOrder } from "./store/actions/index";
+import { addOrder } from "./store/actions/orders";
+import { addItemToOrder } from "./store/actions/orderItems";
 
 const { orders, items } = exampleOrderAndItems;
 

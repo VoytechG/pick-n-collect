@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link, useRouteMatch, useLocation } from "react-router-dom";
 import "./header.css";
 import "../../css/sizing.css";
-import "../../css/colors.css";
 import LinkButton from "./LinkButton";
 import logo from "../../assets/epi_logo_transparent2.png";
 

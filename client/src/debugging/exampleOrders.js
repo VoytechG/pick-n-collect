@@ -1,22 +1,22 @@
 import Order from "../logic/Orders/Order";
 import OrderItem from "../logic/Orders/OrderItem";
 import { OrderStatus } from "../logic/Orders/Order";
-import { v4 as id4 } from "uuid";
+import idGen from "../utils/idGenerator";
 
-const exampleCustomer = id4();
+const exampleCustomer = idGen();
 
 const getExampleOrders = (exampleCustomer) => {
   const exampleOrdersList = [
-    new Order(id4(), exampleCustomer, "mleko i banany", 1, "23/04/2020"),
+    new Order(idGen(), exampleCustomer, "mleko i banany", 1, "23/04/2020"),
     new Order(
-      id4(),
+      idGen(),
       exampleCustomer,
       "zakupy na cały tydzień",
       2,
       "26/04/2020"
     ),
-    new Order(id4(), exampleCustomer, "mineralna i ser", 3, "03/05/2020"),
-    new Order(id4(), exampleCustomer, "-", 4, "03/05/2020"),
+    new Order(idGen(), exampleCustomer, "mineralna i ser", 3, "03/05/2020"),
+    new Order(idGen(), exampleCustomer, "-", 4, "03/05/2020"),
   ];
 
   const orderStatuses = [
@@ -44,7 +44,7 @@ const getExampleOrderItems = (orders) => {
     const order = orders[j];
     for (let i = 0; i < 3; i++) {
       const exampleOrderItem = new OrderItem(
-        id4(),
+        idGen(),
         order.orderId,
         "Mleko",
         "UHT 3.2%, 3 kartony"

@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Order from "../../logic/Orders/Order";
 import "../../css/list-item-box.css";
 import "../../css/interaction.css";
 import { OrderStatusMessagesInPolish } from "../../logic/Orders/Order";

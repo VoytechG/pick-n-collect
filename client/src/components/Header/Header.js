@@ -1,13 +1,9 @@
-import React, { useState } from "react";
-import { Link, useRouteMatch, useLocation } from "react-router-dom";
+import React from "react";
 import "./header.css";
 import "../../css/sizing.css";
-import LinkButton from "./LinkButton";
 import logo from "../../assets/epi_logo_transparent2.png";
 
 const Header = () => {
-  const { pathname: currentUrl } = useLocation();
-
   return (
     <div className="header-container">
       <div className="flex-box-vert-align pos-absolute flex-center">

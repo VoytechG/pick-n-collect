@@ -5,7 +5,6 @@ import "../../css/sizing.css";
 import "../../css/buttons.css";
 
 import { PropTypes } from "prop-types";
-import OrderItem from "../../logic/Orders/OrderItem";
 import { connect } from "react-redux";
 import { modifyOrderItem } from "../../store/actions/orderItems";
 

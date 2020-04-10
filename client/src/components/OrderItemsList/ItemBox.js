@@ -2,18 +2,22 @@ import React, { useState, useRef, useEffect } from "react";
 import "../../css/list-item-box.css";
 import "../../css/input.css";
 import "../../css/sizing.css";
+import "../../css/buttons.css";
+
 import { PropTypes } from "prop-types";
 import OrderItem from "../../logic/Orders/OrderItem";
 import { connect } from "react-redux";
 import { modifyOrderItem } from "../../store/actions/orderItems";
 
 const ItemBox = ({
+  id,
   itemId,
   item,
   modifyItem,
   numberOnTheList,
   newlyAdded,
   removeNewlyAddedTag,
+  deleteItem,
 }) => {
   const [input, setInput] = useState({
     productName: item.productName,
@@ -42,6 +46,7 @@ const ItemBox = ({
 
   return (
     <div
+      id={id}
       className="card"
       onFocus={() => {
         console.log("Focus");
@@ -50,21 +55,26 @@ const ItemBox = ({
         console.log("Lost focus");
       }}
     >
-      <div className="item-title flex">
-        <div>{`#${numberOnTheList}`}</div>
-        <div className="emptySpace"> </div>
-        <input
-          type="text"
-          name={"productName"}
-          placeholder="Produkt (np. jabłka)"
-          value={`${input.productName}`}
-          onChange={onChange}
-          ref={productNameRef}
-          onBlur={() => {
-            handleModifyItem();
-            removeNewlyAddedTag();
-          }}
-        />
+      <div className="item-title flex-space-between">
+        <div className="flex">
+          <div>{`#${numberOnTheList}`}</div>
+          <div className="emptySpace"> </div>
+          <input
+            type="text"
+            name={"productName"}
+            placeholder="Produkt (np. jabłka)"
+            value={`${input.productName}`}
+            onChange={onChange}
+            ref={productNameRef}
+            onBlur={() => {
+              handleModifyItem();
+              removeNewlyAddedTag();
+            }}
+          />
+        </div>
+        <div className="delete-button" onClick={deleteItem}>
+          <div className="list-header-button-box-sm delete-button-fill" />
+        </div>
       </div>
       <textarea
         type="text"
@@ -87,6 +97,7 @@ ItemBox.propTypes = {
   numberOnTheList: PropTypes.number.isRequired,
   newlyAdded: PropTypes.bool.isRequired,
   removeNewlyAddedTag: PropTypes.func.isRequired,
+  deleteItem: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {

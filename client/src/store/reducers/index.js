@@ -1,21 +1,35 @@
 import { combineReducers } from "redux";
 
-import { ADD_ITEM_TO_ORDER, ADD_ORDER, MODIFY_ORDER_ITEM } from "../actions";
+import {
+  ADD_ITEM_TO_ORDER,
+  ADD_ORDER,
+  MODIFY_ORDER_ITEM,
+  REMOVE_ORDER_ITEM,
+} from "../actions";
 
 /**
  * Depth level 2
  */
 
-function order(state = {}, action) {
+function order(_order = {}, action) {
   switch (action.type) {
-    case ADD_ITEM_TO_ORDER:
-      const items = [...state.items, action.item.id];
+    case ADD_ITEM_TO_ORDER: {
+      const items = [..._order.items, action.item.id];
       return {
-        ...state,
+        ..._order,
         items,
       };
+    }
+    case REMOVE_ORDER_ITEM: {
+      const id = action.item.id;
+      const items = _order.items.filter((itemId) => itemId !== id);
+      return {
+        ..._order,
+        items,
+      };
+    }
     default:
-      return state;
+      return _order;
   }
 }
 
@@ -24,36 +38,46 @@ function order(state = {}, action) {
  *
  */
 
-function orders(state = {}, action) {
+function orders(_orders = {}, action) {
   switch (action.type) {
-    case ADD_ORDER:
+    case ADD_ORDER: {
       const { id, props } = action.order;
 
       return {
-        ...state,
+        ..._orders,
         [id]: props,
       };
+    }
     case ADD_ITEM_TO_ORDER:
+    case REMOVE_ORDER_ITEM: {
       const orderId = action.item.props.orderId;
 
       return {
-        ...state,
-        [orderId]: order(state[orderId], action),
+        ..._orders,
+        [orderId]: order(_orders[orderId], action),
       };
+    }
 
     default:
-      return state;
+      return _orders;
   }
 }
 
-function orderItems(state = [], action) {
+function orderItems(_items = [], action) {
   switch (action.type) {
     case ADD_ITEM_TO_ORDER:
-    case MODIFY_ORDER_ITEM:
+    case MODIFY_ORDER_ITEM: {
       const { id, props } = action.item;
-      return { ...state, [id]: props };
+      return { ..._items, [id]: props };
+    }
+    case REMOVE_ORDER_ITEM: {
+      const id = action.item.id;
+      const newState = { ..._items };
+      delete _items[id];
+      return newState;
+    }
     default:
-      return state;
+      return _items;
   }
 }
 

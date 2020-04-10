@@ -1,45 +1,35 @@
-import React, { useState, useEffect } from "react";
-import "../../css/list-item-box.css";
-import Item from "./ItemBox";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import OrderInfo from "./OrderInfo";
 import ItemAddButton from "./ItemAddButton";
-import { useParams, useHistory } from "react-router-dom";
+import Item from "./ItemBox";
 import {
   addItemToOrder,
   removeOrderItem,
 } from "../../store/actions/orderItems";
-import { connect } from "react-redux";
 import idGen from "../../utils/idGenerator";
-import OrderInfo from "./OrderInfo";
 import { collapseItemCard } from "../../domjs/collapseItem";
+import { connect } from "react-redux";
 
-const OrderItemsList = ({ addItemToOrder, deleteItem, orders }) => {
-  const { number } = useParams();
-  const order = orders.filter((ord) => ord.number === Number(number))[0];
-  const orderItems = order ? order.items : null;
-
+const OrderItemsList = ({ order, addItemToOrder, deleteItem }) => {
   const [newlyAddedItemId, setNewItemId] = useState(null);
-  const [allItemIdsCacheOrderedList, setAllItemIdsCache] = useState(orderItems);
+  const [allItemIdsCacheOrderedList, setAllItemIdsCache] = useState(
+    order.items
+  );
   const [deletedItemIds, setDeletedItemsIds] = useState(new Set());
 
-  const history = useHistory();
-  const returnToOrdersList = () => {
-    history.push("");
-  };
-
   const handleAddingNewItem = () => {
-    if (order) {
-      const newOrderItem = {
-        id: idGen(),
-        props: {
-          orderId: order.id,
-          productName: "",
-          productDescription: "",
-        },
-      };
-      addItemToOrder(newOrderItem);
-      setNewItemId(newOrderItem.id);
-      setAllItemIdsCache([...allItemIdsCacheOrderedList, newOrderItem.id]);
-    }
+    const newOrderItem = {
+      id: idGen(),
+      props: {
+        orderId: order.id,
+        productName: "",
+        productDescription: "",
+      },
+    };
+    addItemToOrder(newOrderItem);
+    setNewItemId(newOrderItem.id);
+    setAllItemIdsCache([...allItemIdsCacheOrderedList, newOrderItem.id]);
   };
 
   const handleItemDeletion = (itemId, orderId) => {
@@ -49,56 +39,38 @@ const OrderItemsList = ({ addItemToOrder, deleteItem, orders }) => {
   };
 
   let itemCounter = 0;
+
   return (
     <>
-      <div className="list-header ">
-        <div className="return-button" onClick={returnToOrdersList}>
-          <div className="list-header-button-box return-button-fill" />
-        </div>
+      <OrderInfo order={order} />
+      <div className="header-center margin-vertical no-margin-bottom">
+        <div>Produkty na mojej liście</div>
       </div>
-      {order ? (
-        <>
-          <OrderInfo order={order} />
-          <div className="header-center margin-vertical no-margin-bottom">
-            <div>Produkty na mojej liście</div>
-          </div>
-          {allItemIdsCacheOrderedList.map((itemId) => {
-            if (!deletedItemIds.has(itemId)) {
-              itemCounter++;
-            }
-            return (
-              <Item
-                key={itemId}
-                itemId={itemId}
-                id={itemId}
-                numberOnTheList={itemCounter}
-                newlyAdded={newlyAddedItemId === itemId}
-                removeNewlyAddedTag={() => setNewItemId(null)}
-                deleteItem={() => handleItemDeletion(itemId, order.id)}
-              />
-            );
-          })}
-          <ItemAddButton onClick={handleAddingNewItem} />
-        </>
-      ) : (
-        <div className="header-center">
-          Zamówienie o numerze #{number} nie istnieje.
-        </div>
-      )}
+      {allItemIdsCacheOrderedList.map((itemId) => {
+        if (!deletedItemIds.has(itemId)) {
+          itemCounter++;
+        }
+        return (
+          <Item
+            key={itemId}
+            itemId={itemId}
+            id={itemId}
+            numberOnTheList={itemCounter}
+            newlyAdded={newlyAddedItemId === itemId}
+            removeNewlyAddedTag={() => setNewItemId(null)}
+            deleteItem={() => handleItemDeletion(itemId, order.id)}
+          />
+        );
+      })}
+      <ItemAddButton onClick={handleAddingNewItem} />
     </>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    // items: state.orderItems,
-    orders: Object.entries(state.orders).map(([key, props]) => {
-      return {
-        id: key,
-        ...props,
-      };
-    }),
-  };
+OrderItemsList.propTypes = {
+  order: PropTypes.object.isRequired,
+  addItemToOrder: PropTypes.func.isRequired,
+  deleteItem: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -112,4 +84,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderItemsList);
+export default connect(null, mapDispatchToProps)(OrderItemsList);

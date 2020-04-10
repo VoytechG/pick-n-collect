@@ -9,10 +9,10 @@ import Container from "./components/Container/Container";
 import Header from "./components/Header/Header";
 import "./css/App.css";
 import OrdersList from "./components/OrdersList/OrdersList";
-import OrderItemsList from "./components/OrderItemsList/OrderItemsList";
 
 import populateStoreIfEmpty from "./debugging/mockData/populateStoreWithMockData";
 import config from "./config";
+import OrderItemsPage from "./components/OrderItemsList/OrderItemsPage";
 
 const Redirect = ({ path }) => {
   useHistory().push(path);
@@ -31,7 +31,7 @@ const App = () => {
             <Redirect path="orders" />
           </Route>
           <Route exact path="/orders" component={OrdersList} />
-          <Route path="/orders/:number" component={OrderItemsList} />
+          <Route path="/orders/:number" component={OrderItemsPage} />
         </Switch>
       </Container>
     </Router>

@@ -11,7 +11,7 @@ import idGen from "../../utils/idGenerator";
 import { collapseItemCard } from "../../domjs/collapseItem";
 import { connect } from "react-redux";
 
-const OrderItemsList = ({ order, addItemToOrder, deleteItem }) => {
+const OrderItemsList = ({ order, orderId, addItemToOrder, deleteItem }) => {
   const [newlyAddedItemId, setNewItemId] = useState(null);
   const [allItemIdsCacheOrderedList, setAllItemIdsCache] = useState(
     order.items
@@ -42,7 +42,7 @@ const OrderItemsList = ({ order, addItemToOrder, deleteItem }) => {
 
   return (
     <>
-      <OrderInfo order={order} />
+      <OrderInfo order={order} orderId={orderId} />
       <div className="header-center margin-vertical no-margin-bottom">
         <div>Produkty na mojej liście</div>
       </div>
@@ -52,9 +52,9 @@ const OrderItemsList = ({ order, addItemToOrder, deleteItem }) => {
         }
         return (
           <Item
+            id={itemId}
             key={itemId}
             itemId={itemId}
-            id={itemId}
             numberOnTheList={itemCounter}
             newlyAdded={newlyAddedItemId === itemId}
             removeNewlyAddedTag={() => setNewItemId(null)}
@@ -69,6 +69,7 @@ const OrderItemsList = ({ order, addItemToOrder, deleteItem }) => {
 
 OrderItemsList.propTypes = {
   order: PropTypes.object.isRequired,
+  orderId: PropTypes.string.isRequired,
   addItemToOrder: PropTypes.func.isRequired,
   deleteItem: PropTypes.func.isRequired,
 };

@@ -16,7 +16,7 @@ const getExampleOrders = (exampleCustomer) => {
       "26/04/2020"
     ),
     new Order(idGen(), exampleCustomer, "mineralna i ser", 3, "03/05/2020"),
-    new Order(idGen(), exampleCustomer, "-", 4, "03/05/2020"),
+    new Order(idGen(), exampleCustomer, "", 4, "03/05/2020"),
   ];
 
   const orderStatuses = [

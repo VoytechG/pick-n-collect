@@ -7,6 +7,8 @@
   /* display: flex;
   align-items: center; */
   background-color: white;
+  z-index: 2;
+  box-shadow: rgba(3, 8, 20, 0.05) 0px 0.1rem 0.3rem;
 }
 
 .list-header-button-box {
@@ -152,6 +154,10 @@
   animation: cardEntrance 200ms ease-out;
   animation-fill-mode: backwards;
   animation-play-state: inherit;
+}
+
+.card-margin-bottom {
+  margin-bottom: 20px;
 }
 
 @keyframes cardExit {

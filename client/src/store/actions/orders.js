@@ -1,6 +1,6 @@
-import { validateType, ADD_ORDER } from "./index";
+import { validateType, ADD_ORDER, MODIFY_ORDER } from "./index";
 
-export function addOrder(order) {
+function validateOrder(order) {
   const { id, props } = order;
   validateType({ id }, { id: "string" });
   validateType(props, {
@@ -12,6 +12,15 @@ export function addOrder(order) {
     items: "object",
     totalBillingAmount: "number",
   });
+}
 
+export function addOrder(order) {
+  validateOrder(order);
   return { type: ADD_ORDER, order };
+}
+
+export function modifyOrder(order) {
+  console.log(order);
+  validateOrder(order);
+  return { type: MODIFY_ORDER, order };
 }

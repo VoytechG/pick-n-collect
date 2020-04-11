@@ -5,6 +5,7 @@ import {
   ADD_ORDER,
   MODIFY_ORDER_ITEM,
   REMOVE_ORDER_ITEM,
+  MODIFY_ORDER,
 } from "../actions";
 
 /**
@@ -40,7 +41,8 @@ function order(_order = {}, action) {
 
 function orders(_orders = {}, action) {
   switch (action.type) {
-    case ADD_ORDER: {
+    case ADD_ORDER:
+    case MODIFY_ORDER: {
       const { id, props } = action.order;
 
       return {

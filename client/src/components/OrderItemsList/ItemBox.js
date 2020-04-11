@@ -37,7 +37,7 @@ const ItemBox = ({
     if (newlyAdded) {
       productNameRef.current.focus();
     }
-  });
+  }, [newlyAdded]);
 
   const handleModifyItem = () => {
     modifyItem(itemId, { ...item, ...input });

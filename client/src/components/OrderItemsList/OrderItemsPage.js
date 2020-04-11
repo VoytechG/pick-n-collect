@@ -7,7 +7,9 @@ import OrderItemsList from "./OrderItemsList";
 
 const OrderItemsPage = ({ orders }) => {
   const { number } = useParams();
-  const order = orders.filter((ord) => ord.number === Number(number))[0];
+  const [orderId, order] = Object.entries(orders).filter(
+    ([id, props]) => props.number === Number(number)
+  )[0];
 
   const history = useHistory();
   const returnToOrdersList = () => {
@@ -22,7 +24,7 @@ const OrderItemsPage = ({ orders }) => {
         </div>
       </div>
       {order ? (
-        <OrderItemsList order={order} />
+        <OrderItemsList order={order} orderId={orderId} />
       ) : (
         <div className="header-center">
           Zamówienie o numerze #{number} nie istnieje.
@@ -34,12 +36,13 @@ const OrderItemsPage = ({ orders }) => {
 
 const mapStateToProps = (state) => {
   return {
-    orders: Object.entries(state.orders).map(([key, props]) => {
-      return {
-        id: key,
-        ...props,
-      };
-    }),
+    // orders: Object.entries(state.orders).map(([key, props]) => {
+    //   return {
+    //     id: key,
+    //     props,
+    //   };
+    // }),
+    orders: state.orders,
   };
 };
 

@@ -7,6 +7,7 @@ import { OrderStatusMessagesInPolish } from "../../logic/Orders/Order";
 import { connect } from "react-redux";
 
 import { modifyOrder } from "../../store/actions/orders";
+import { blurOnEnter } from "../../domjs/inputControls";
 
 function formatBillingAmount(order) {
   const totalBillingAmount = order.totalBillingAmount
@@ -38,17 +39,20 @@ const OrderInfo = ({ orderId, order, modifyOrderNotes }) => {
         <div className="font-bold">{`Zakupy #${order.number}`}</div>
         <div>{order.dateOrderPlaced}</div>
       </div>
-      <input
-        type="text"
-        name="notes"
-        placeholder="notatki (np. zakupy na cały tydzień)"
-        value={`${input.notes}`}
-        onChange={onChange}
-        onBlur={() => {
-          handleModifyItem();
-          // removeNewlyAddedTag();
-        }}
-      />
+      <div className="flex">
+        <input
+          type="text"
+          name="notes"
+          placeholder="notatki (np. zakupy na cały tydzień)"
+          value={`${input.notes}`}
+          onChange={onChange}
+          onBlur={() => {
+            handleModifyItem();
+            // removeNewlyAddedTag();
+          }}
+          onKeyDown={blurOnEnter}
+        />
+      </div>
       <div className="flex">
         <div>Suma: </div>
         <div className="flex-gap"></div>

@@ -7,6 +7,7 @@ import "../../css/buttons.css";
 import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import { modifyOrderItem } from "../../store/actions/orderItems";
+import { blurOnEnter } from "../../domjs/inputControls";
 
 const ItemBox = ({
   id,
@@ -69,6 +70,7 @@ const ItemBox = ({
               handleModifyItem();
               removeNewlyAddedTag();
             }}
+            onKeyDown={blurOnEnter}
           />
         </div>
         <div className="delete-button" onClick={deleteItem}>

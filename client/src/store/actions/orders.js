@@ -20,7 +20,6 @@ export function addOrder(order) {
 }
 
 export function modifyOrder(order) {
-  console.log(order);
   validateOrder(order);
   return { type: MODIFY_ORDER, order };
 }

@@ -92,13 +92,16 @@ const ItemBox = ({
 };
 
 ItemBox.propTypes = {
+  // Data
   itemId: PropTypes.string.isRequired,
   item: PropTypes.object.isRequired,
   modifyItem: PropTypes.func.isRequired,
-  numberOnTheList: PropTypes.number.isRequired,
+  deleteItem: PropTypes.func.isRequired,
+
+  // UI
   newlyAdded: PropTypes.bool.isRequired,
   removeNewlyAddedTag: PropTypes.func.isRequired,
-  deleteItem: PropTypes.func.isRequired,
+  numberOnTheList: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = (state, ownProps) => {

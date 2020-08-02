@@ -22,7 +22,7 @@ const OrderItemsList = ({ order, orderId, addItemToOrder, deleteItem }) => {
     const newOrderItem = {
       id: idGen(),
       props: {
-        orderId: order.id,
+        orderId: orderId,
         productName: "",
         productDescription: "",
       },
@@ -58,7 +58,7 @@ const OrderItemsList = ({ order, orderId, addItemToOrder, deleteItem }) => {
             numberOnTheList={itemCounter}
             newlyAdded={newlyAddedItemId === itemId}
             removeNewlyAddedTag={() => setNewItemId(null)}
-            deleteItem={() => handleItemDeletion(itemId, order.id)}
+            deleteItem={() => handleItemDeletion(itemId, orderId)}
           />
         );
       })}

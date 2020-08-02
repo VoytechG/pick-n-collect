@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Order, {
-  OrderStatusMessagesInPolish,
+  OrderStatusMessages,
   OrderStatus,
 } from "../../logic/Orders/Order";
 import { connect } from "react-redux";
@@ -11,7 +11,7 @@ const PlaceOrderController = ({ order, orderId }) => {
   return (
     <div className="flex-center list-header-middle">
       {order.status === OrderStatus.DRAFT}
-      <div>{OrderStatusMessagesInPolish[order.status]}</div>
+      <div>{OrderStatusMessages[order.status]["English"]}</div>
     </div>
   );
 };

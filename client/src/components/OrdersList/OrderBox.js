@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "../../css/list-item-box.css";
 import "../../css/interaction.css";
-import { OrderStatusMessagesInPolish } from "../../logic/Orders/Order";
+import { OrderStatusMessages } from "../../logic/Orders/Order";
 import { useHistory, useRouteMatch } from "react-router-dom";
 
 const OrderBox = ({ order }) => {
@@ -35,7 +35,7 @@ const OrderBox = ({ order }) => {
         <div className="font-bold">{totalBillingAmount}</div>
       </div>
       <div className="flex-center">
-        <div>{OrderStatusMessagesInPolish[order.status]}</div>
+        <div>{OrderStatusMessages[order.status]["English"]}</div>
       </div>
     </div>
   );

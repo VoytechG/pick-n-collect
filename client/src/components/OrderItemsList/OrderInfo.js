@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import "../../css/list-item-box.css";
 import "../../css/interaction.css";
 import "../../css/input.css";
-import { OrderStatusMessagesInPolish } from "../../logic/Orders/Order";
+import { OrderStatusMessages } from "../../logic/Orders/Order";
 import { connect } from "react-redux";
 
 import { modifyOrder } from "../../store/actions/orders";
@@ -59,7 +59,7 @@ const OrderInfo = ({ orderId, order, modifyOrderNotes }) => {
         <div className="font-bold">{formatBillingAmount(order)}</div>
       </div>
       <div className="flex-center">
-        <div>{OrderStatusMessagesInPolish[order.status]}</div>
+        <div>{OrderStatusMessages[order.status]["English"]}</div>
       </div>
     </div>
   );

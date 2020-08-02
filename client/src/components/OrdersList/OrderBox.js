@@ -2,10 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import "../../css/list-item-box.css";
 import "../../css/interaction.css";
-import { OrderStatusMessages } from "../../logic/Orders/Order";
+import {
+  OrderStatusMessages,
+  sumMessage,
+  orderTitle,
+} from "../../logic/Orders/Order";
 import { useHistory, useRouteMatch } from "react-router-dom";
+import { connect } from "react-redux";
 
-const OrderBox = ({ order }) => {
+const OrderBox = ({ order, language }) => {
   const { url } = useRouteMatch();
   const history = useHistory();
 
@@ -16,7 +21,7 @@ const OrderBox = ({ order }) => {
   };
 
   const totalBillingAmount = order.totalBillingAmount
-    ? `${order.totalBillingAmount.toFixed(2)}  zł`
+    ? `${order.totalBillingAmount.toFixed(2)} €`
     : "-//-";
 
   return (
@@ -25,17 +30,17 @@ const OrderBox = ({ order }) => {
       onClick={redirectToOrder}
     >
       <div className="flex-space-between font-bigger">
-        <div className="font-bold">{`Zakupy #${order.number}`}</div>
+        <div className="font-bold">{`${orderTitle[language]} #${order.number}`}</div>
         <div>{order.dateOrderPlaced}</div>
       </div>
       <div>{order.notes}</div>
       <div className="flex">
-        <div>Suma: </div>
+        <div>{sumMessage[language]}</div>
         <div className="flex-gap"></div>
         <div className="font-bold">{totalBillingAmount}</div>
       </div>
       <div className="flex-center">
-        <div>{OrderStatusMessages[order.status]["English"]}</div>
+        <div>{OrderStatusMessages[order.status][language]}</div>
       </div>
     </div>
   );
@@ -45,4 +50,11 @@ OrderBox.propTypes = {
   order: PropTypes.object.isRequired,
 };
 
-export default OrderBox;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    language: state.language,
+    ...ownProps,
+  };
+};
+
+export default connect(mapStateToProps)(OrderBox);

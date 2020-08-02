@@ -5,6 +5,8 @@ export const ADD_ITEM_TO_ORDER = "ADD_ITEM_TO_ORDER";
 export const MODIFY_ORDER_ITEM = "MODIFY_ORDER_ITEM";
 export const REMOVE_ORDER_ITEM = "REMOVE_ORDER_ITEM";
 
+export const SET_LANGUAGE = "SET_LANGUAGE";
+
 export function validateType(obj, types) {
   if (Object.keys(obj).length !== Object.keys(types).length) {
     throw new TypeError("wrong type");

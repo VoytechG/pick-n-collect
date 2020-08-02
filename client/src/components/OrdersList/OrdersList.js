@@ -4,11 +4,12 @@ import OrderBox from "./OrderBox";
 import "../../css/list-item-box.css";
 import { connect } from "react-redux";
 import { addOrder } from "../../store/actions/orders";
+import { orderListHeader } from "../../logic/Orders/Order";
 
-const OrdersList = ({ orders, addOrder }) => {
+const OrdersList = ({ orders, language, addOrder }) => {
   return (
     <div>
-      <div className="list-header flex-center">Moje EPI Zakupy</div>
+      <div className="list-header flex-center">{orderListHeader[language]}</div>
       <div>
         {orders
           .sort((order_a, order_b) => order_b.number - order_a.number)
@@ -33,6 +34,7 @@ const mapStateToProps = (state) => {
         ...props,
       };
     }),
+    language: state.language,
   };
 };
 

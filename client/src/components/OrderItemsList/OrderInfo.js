@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import "../../css/list-item-box.css";
 import "../../css/interaction.css";
 import "../../css/input.css";
-import { OrderStatusMessages } from "../../logic/Orders/Order";
+import { OrderStatusMessages, sumMessage } from "../../logic/Orders/Order";
 import { connect } from "react-redux";
 
 import { modifyOrder } from "../../store/actions/orders";
@@ -11,12 +11,12 @@ import { blurOnEnter } from "../../domjs/inputControls";
 
 function formatBillingAmount(order) {
   const totalBillingAmount = order.totalBillingAmount
-    ? `${order.totalBillingAmount.toFixed(2)}  zł`
+    ? `${order.totalBillingAmount.toFixed(2)} €`
     : "-//-";
   return totalBillingAmount;
 }
 
-const OrderInfo = ({ orderId, order, modifyOrderNotes }) => {
+const OrderInfo = ({ orderId, order, modifyOrderNotes, language }) => {
   const [input, setInput] = useState({
     notes: order.notes,
   });
@@ -54,12 +54,12 @@ const OrderInfo = ({ orderId, order, modifyOrderNotes }) => {
         />
       </div>
       <div className="flex">
-        <div>Suma: </div>
+        <div>{sumMessage[language]} </div>
         <div className="flex-gap"></div>
         <div className="font-bold">{formatBillingAmount(order)}</div>
       </div>
       <div className="flex-center">
-        <div>{OrderStatusMessages[order.status]["English"]}</div>
+        <div>{OrderStatusMessages[order.status][language]}</div>
       </div>
     </div>
   );
@@ -69,6 +69,13 @@ OrderInfo.propTypes = {
   orderId: PropTypes.string.isRequired,
   order: PropTypes.object.isRequired,
   modifyOrderNotes: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    language: state.language,
+    ...ownProps,
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -84,4 +91,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(OrderInfo);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderInfo);

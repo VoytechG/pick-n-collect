@@ -9,10 +9,22 @@ export const OrderStatus = {
   COLLECTED: "COLLECTED",
 };
 
-export const OrderListHeader = {
+export const orderListHeader = {
   Polish: "Moje zakupy",
   German: "Meine Einkaufen",
   English: "My orders",
+};
+
+export const sumMessage = {
+  Polish: "Suma",
+  German: "Summe",
+  English: "Sum",
+};
+
+export const orderTitle = {
+  Polish: "Zakupy",
+  German: "Bestellung",
+  English: "Order",
 };
 
 export const OrderStatusMessages = {

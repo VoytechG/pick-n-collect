@@ -8,6 +8,8 @@ import {
   MODIFY_ORDER,
 } from "../actions";
 
+import language from "./appSettings";
+
 /**
  * Depth level 2
  */
@@ -87,6 +89,6 @@ function orderItems(_items = [], action) {
  *  root
  */
 
-const app = combineReducers({ orders, orderItems });
+const app = combineReducers({ orders, orderItems, language });
 
 export default app;

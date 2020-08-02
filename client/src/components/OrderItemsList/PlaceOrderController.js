@@ -7,16 +7,23 @@ import Order, {
 import { connect } from "react-redux";
 import { modifyOrder } from "../../store/actions/orders";
 
-const PlaceOrderController = ({ order, orderId }) => {
+const PlaceOrderController = ({ order, orderId, language }) => {
   return (
     <div className="flex-center list-header-middle">
       {order.status === OrderStatus.DRAFT}
-      <div>{OrderStatusMessages[order.status]["English"]}</div>
+      <div>{OrderStatusMessages[order.status][language]}</div>
     </div>
   );
 };
 
 PlaceOrderController.propTypes = { order: PropTypes.object.isRequired };
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    language: state.language,
+    ...ownProps,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -31,4 +38,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect()(PlaceOrderController);
+export default connect(mapStateToProps)(PlaceOrderController);

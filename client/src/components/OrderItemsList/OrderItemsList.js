@@ -10,8 +10,15 @@ import {
 import idGen from "../../utils/idGenerator";
 import { collapseItemCard } from "../../domjs/collapseItem";
 import { connect } from "react-redux";
+import { orderItemsListHeader } from "../../logic/Orders/Order";
 
-const OrderItemsList = ({ order, orderId, addItemToOrder, deleteItem }) => {
+const OrderItemsList = ({
+  order,
+  orderId,
+  language,
+  addItemToOrder,
+  deleteItem,
+}) => {
   const [newlyAddedItemId, setNewItemId] = useState(null);
   const [allItemIdsCacheOrderedList, setAllItemIdsCache] = useState(
     order.items
@@ -44,7 +51,7 @@ const OrderItemsList = ({ order, orderId, addItemToOrder, deleteItem }) => {
     <>
       <OrderInfo order={order} orderId={orderId} />
       <div className="header-center margin-vertical no-margin-bottom">
-        <div>Produkty na mojej liście</div>
+        <div>{orderItemsListHeader[language]}</div>
       </div>
       {allItemIdsCacheOrderedList.map((itemId) => {
         if (!deletedItemIds.has(itemId)) {
@@ -74,6 +81,13 @@ OrderItemsList.propTypes = {
   deleteItem: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    language: state.language,
+    ...ownProps,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     addItemToOrder: (item) => {
@@ -85,4 +99,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(OrderItemsList);
+export default connect(mapStateToProps, mapDispatchToProps)(OrderItemsList);

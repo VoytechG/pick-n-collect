@@ -1,7 +1,7 @@
 import React from "react";
 import "./header.css";
 import "../../css/sizing.css";
-import logo from "../../assets/epi_logo_transparent2.png";
+// import logo from "../../assets/epi_logo_transparent2.png";
 import logo2 from "../../assets/flycollect.png";
 
 const Header = () => {

@@ -7,15 +7,15 @@ const exampleCustomer = idGen();
 
 const getExampleOrders = (exampleCustomer) => {
   const exampleOrdersList = [
-    new Order(idGen(), exampleCustomer, "mleko i banany", 1, "23/04/2020"),
+    new Order(idGen(), exampleCustomer, "milk and bananas", 1, "23/04/2020"),
+    new Order(idGen(), exampleCustomer, "weekly shopping", 2, "26/04/2020"),
     new Order(
       idGen(),
       exampleCustomer,
-      "zakupy na cały tydzień",
-      2,
-      "26/04/2020"
+      "mineral water and cheese",
+      3,
+      "03/05/2020"
     ),
-    new Order(idGen(), exampleCustomer, "mineralna i ser", 3, "03/05/2020"),
     new Order(idGen(), exampleCustomer, "", 4, "03/05/2020"),
   ];
 
@@ -46,8 +46,8 @@ const getExampleOrderItems = (orders) => {
       const exampleOrderItem = new OrderItem(
         idGen(),
         order.orderId,
-        "Mleko",
-        "UHT 3.2%, 3 kartony"
+        "Milk",
+        "UHT 3.2%, 3 bottles"
       );
 
       items.push(exampleOrderItem);

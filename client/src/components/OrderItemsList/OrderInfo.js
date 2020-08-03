@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 import "../../css/list-item-box.css";
 import "../../css/interaction.css";
 import "../../css/input.css";
-import { OrderStatusMessages, sumMessage } from "../../logic/Orders/Order";
+import {
+  orderSubtitlePlaceholder,
+  OrderStatusMessages,
+  orderTitle,
+  sumMessage,
+} from "../../logic/Orders/Order";
 import { connect } from "react-redux";
 
 import { modifyOrder } from "../../store/actions/orders";
@@ -36,14 +41,14 @@ const OrderInfo = ({ orderId, order, modifyOrderNotes, language }) => {
   return (
     <div className="card no-margin-bottom">
       <div className="flex-space-between font-bigger">
-        <div className="font-bold">{`Zakupy #${order.number}`}</div>
+        <div className="font-bold">{`${orderTitle[language]} #${order.number}`}</div>
         <div>{order.dateOrderPlaced}</div>
       </div>
       <div className="flex">
         <input
           type="text"
           name="notes"
-          placeholder="notatki (np. zakupy na cały tydzień)"
+          placeholder={orderSubtitlePlaceholder[language]}
           value={`${input.notes}`}
           onChange={onChange}
           onBlur={() => {

@@ -9,6 +9,18 @@ export const OrderStatus = {
   COLLECTED: "COLLECTED",
 };
 
+export const orderSubtitlePlaceholder = {
+  Polish: "notatki (np. zakupy na cały tydzień)",
+  German: "Noten (z.B. tägliches Einkaufen)",
+  English: "notes (e.g. weekly shopping)",
+};
+
+export const orderItemsListHeader = {
+  Polish: "Produkty na mojej liście",
+  German: "Meine Einkaufsliste",
+  English: "Products in my basket",
+};
+
 export const orderListHeader = {
   Polish: "Moje zakupy",
   German: "Meine Einkaufen",

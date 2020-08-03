@@ -8,11 +8,16 @@ import { PropTypes } from "prop-types";
 import { connect } from "react-redux";
 import { modifyOrderItem } from "../../store/actions/orderItems";
 import { blurOnEnter } from "../../domjs/inputControls";
+import {
+  orderItemTitlePlaceholder,
+  orderItemSubtitlePlaceholder,
+} from "../../logic/Orders/OrderItem";
 
 const ItemBox = ({
   id,
   itemId,
   item,
+  language,
   modifyItem,
   numberOnTheList,
   newlyAdded,
@@ -62,7 +67,7 @@ const ItemBox = ({
           <input
             type="text"
             name={"productName"}
-            placeholder="Produkt (np. jabłka)"
+            placeholder={orderItemTitlePlaceholder[language]}
             value={`${input.productName}`}
             onChange={onChange}
             ref={productNameRef}
@@ -80,7 +85,7 @@ const ItemBox = ({
       <textarea
         type="text"
         name={"productDescription"}
-        placeholder="Opis (np. 3 sztuki, 20 dag)"
+        placeholder={orderItemSubtitlePlaceholder[language]}
         value={`${input.productDescription}`}
         onChange={(e) => {
           onChange(e);
@@ -108,6 +113,7 @@ const mapStateToProps = (state, ownProps) => {
   const { itemId } = ownProps;
   return {
     item: { ...state.orderItems[itemId] },
+    language: state.language,
   };
 };
 
